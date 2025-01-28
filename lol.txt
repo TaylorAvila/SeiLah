@@ -1,0 +1,1677 @@
+
+#SingleInstance force
+#NoEnv
+SetWorkingDir, %A_ScriptDir%
+Menu, Tray, Tip, k1 the Legend
+Menu, tray, add, k1~, k1
+Gui, Default
+Gui, +LastFound
+Gui, Font, S10, Arial Bold
+
+
+
+Gui, Add, Text, x16 y17 w90 h30, RO Window:
+Gui, Font, S8, Arial Bold
+Gui, Add, Edit, x106 y17 w120	 +Left vRoWindowName,
+Gui, Font, S10, Arial Bold
+Gui, Add, Text, x325 y17 w80 h20  +Left , Monster:
+Gui, Add, Text, x325 y47 w90 h20  +Left , Map:
+Gui, Add, Text, x495 y47 w90 h20  +Left , DS:
+Gui, Add, Edit, x365 y47 w40 h20 +Limit3 vTimeOnMap, 3
+Gui, Add, Edit, x525 y47 w40 h20 +Limit3 vTimeOnDS, 24
+Gui, Font, S7, Arial Bold
+Gui, Add, Text, x410 y47 w70 h20  +Left , (1 = 0.2~0.3min)
+Gui, Font, S10, Arial Bold
+Gui, Add, DropDownList, x395 y17 w180 h20 R10 vMonster, ||Abysmal Knight|Alice|Alligator|Anubis|Argiope|Argos|Banshee|Baphomet Jr.|Bathory|BigFoot|Clock|Creamy|Cruiser|Dragon Tail|Drainliar|Drops|Dryad|Dustiness|Enchanted Peach Tree|Explosion|Evil Cloud Hermit|Evil Druid|Fabre|Frilldora|Gargoyle|Green Ferus|Hidra|Horn|Iara|Incubus|Jing Guai|Mantis|Marc|Matyr/Marduk|Medusa|Minorous|Nightmare|Noxious|Orc Archer|Pasana|Peco Peco Egg|Porcellio|Raydric/Alice|Scorpion|Skeleton Worker|Smokie|Snowier|Sohee|Sting|Thara Frog|Thief Bug Female|Thief Bug Male|Tri Joint|Verit|Whisper|Zerom|Cruiser/Myst Case|Hidra/Thara|Thief Bug Female/Male
+Gui, Add, Button, x235 y17 w70 h20 gRoWindow, RO
+Gui, Add, Button, x25 y334 w80 h20  gStartBot, Start
+Gui, Add, Button, x125 y364 w80 h20 gSave, Save
+Gui, Add, Button, x125 y334 w80 h20 gLoad, Load
+Gui, Add, Button, x25 y364 w80 h20 , Exit
+Gui, Add, Button, x215 y334 w80 h20 gClear , Clear
+Gui, Add, Button, x215 y364 w80 h20 gReload , Reload
+
+
+
+Gui, Add, GroupBox, x16 y47 w290 h210 +Center, Skills
+Gui, Add, GroupBox, x16 y250 w290 h80
+Gui, Add, Checkbox, x194 y75 w20 h20 vUse,
+Gui, Add, Checkbox, x194 y105 w20 h20 vUse1 gUse1,
+Gui, Add, Checkbox, x194 y135 w20 h20 vUse2 gUse2,
+Gui, Add, Checkbox, x194 y165 w20 h20 vUse3 gUse3,
+Gui, Add, CheckBox, x194 y195 w20 h20 vUse4 gUse4,
+Gui, Add, CheckBox, x194 y225 w20 h20 vUse5 gUse5,
+Gui, Add, Checkbox, x194 y265 w20 h20 vUse6 gUse6,
+Gui, Add, Checkbox, x194 y295 w20 h20 vUse11 gUse11,
+Gui, Add, Text, x186 y57 w40 h20 +Left, on/off
+Gui, Add, Text, x236 y57 w60 h20 +Center, Hotkey
+Gui, Add, Text, x25 y76 w100 h20 +Left, Auto Attack
+Gui, Add, Text, x25 y105 w160 h20 +Left, Double Strafing
+Gui, Add, Text, x25 y135 w160 h20 +Left, Attention Concentration
+Gui, Add, Text, x25 y165 w160 h20 +Left, True Sight
+Gui, Add, Text, x25 y195 w160 h20 +Left, Wind Walk
+Gui, Add, Text, x25 y225 w160 h20 +Left, Fly Wing/Teleport
+Gui, Add, Text, x25 y265 w160 h20 +Left, Aspd Potion
+Gui, Add, Text, x25 y295 w160 h20 +Left, Vip
+Gui, Add, DropDownList, x235 y105 w60 h20 R5 vSkill1 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+Gui, Add, DropDownList, x235 y135 w60 h20 R5 vSkill2 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+Gui, Add, DropDownList, x235 y165 w60 h20 R5 vSkill3 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+Gui, Add, DropDownList, x235 y195 w60 h20 R5 vSkill4 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+Gui, Add, DropDownList, x235 y225 w60 h20 R5 vSkill5 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+Gui, Add, DropDownList, x235 y265 w60 h20 R5 vSkill6 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+Gui, Add, DropDownList, x235 y295 w60 h20 R5 vSkill7 Disabled, F1|F2|F3|F4|F5|F6|F7|F8|F9
+
+
+
+Gui, Add, GroupBox, x315 y75 w300 h200 +Center, Coordenates
+Gui, Add, Button, x324 y100 w80 h20 , GetCoord
+Gui, Add, Text, x434 y100 w40 h20 , on/off
+Gui, Add, Text, x484 y100 w120 h20 +Center, Height/Width
+Gui, Add, Text, x324 y125 w100 h20 +Left, Healer
+Gui, Add, Text, x324 y155 w100 h20 +Left, Teleporter
+Gui, Add, Text, x324 y185 w100 h20 +Left, Warp
+Gui, Add, Text, x324 y215 w100 h20 +Left, Storage
+Gui, Add, Text, x324 y245 w100 h20 +Left, Inventory
+Gui, Add, Edit, x494 y125 w50 h20 vCoord1 +Limit5 Disabled, x
+Gui, Add, Edit, x554 y125 w50 h20 vCoord6 +Limit5 Disabled, y
+Gui, Add, Edit, x494 y155 w50 h20 vCoord2 +Limit5 Disabled, x
+Gui, Add, Edit, x554 y155 w50 h20 vCoord7 +Limit5 Disabled, y
+Gui, Add, Edit, x494 y185 w50 h20 vCoord3 +Limit5 Disabled, x
+Gui, Add, Edit, x554 y185 w50 h20 vCoord8 +Limit5 Disabled, y
+Gui, Add, Edit, x494 y215 w50 h20 vCoord4 +Limit5 Disabled, x
+Gui, Add, Edit, x554 y215 w50 h20 vCoord9 +Limit5 Disabled, y
+Gui, Add, Edit, x494 y245 w50 h20 vCoord5 +Limit5 Disabled, y,
+Gui, Add, Edit, x554 y245 w50 h20 vCoord10 +Limit5 Disabled, y,
+Gui, Add, CheckBox, x444 y125 w20 h20 vUse7 gUse7,
+Gui, Add, CheckBox, x444 y155 w20 h20 vUse8 gUse8,
+Gui, Add, CheckBox, x444 y185 w20 h20 vUse9 gUse9,
+Gui, Add, CheckBox, x444 y215 w20 h20 vUse10 gUse10,
+
+
+
+Gui, Add, GroupBox, x314 y275 w300 h110 +Center, Alt + M
+Gui, Add, Text, x364 y295 w70 h20 +Left, @storage
+Gui, Add, Text, x364 y325 w70 h20 +Left, @go
+Gui, Add, Text, x364 y355 w70 h20 , @refresh
+Gui, Add, Text, x444 y295 w20 h20 , alt
+Gui, Add, Text, x444 y325 w20 h20 , alt
+Gui, Add, Text, x444 y355 w20 h20 , alt
+Gui, Add, Text, x474 y295 w20 h20 +Center, +
+Gui, Add, Text, x474 y325 w20 h20 +Center, +
+Gui, Add, Text, x474 y355 w20 h20 +Center, +
+Gui, Add, DropDownList, x504 y295 w60 h24 R5 vAlt1, 1|2|3|4|5|6|7|8|9|0
+Gui, Add, DropDownList, x504 y325 w60 h24 R5 vAlt2, 1|2|3|4|5|6|7|8|9|0
+Gui, Add, DropDownList, x504 y355 w60 h24 R5 vAlt3, 1|2|3|4|5|6|7|8|9|0
+
+
+
+IniRead, SaveReload1, SavedReload.ini, settings, HealerCoordenate|X, %A_Space%
+IniRead, SaveReload2, SavedReload.ini, settings, HealerCoordenate|Y, %A_Space%
+IniRead, SaveReload3, SavedReload.ini, settings, TeleporterCoordenate|X, %A_Space%
+IniRead, SaveReload4, SavedReload.ini, settings, TeleporterCoordenate|y, %A_Space%
+IniRead, SaveReload5, SavedReload.ini, settings, Warp|X, %A_Space%
+IniRead, SaveReload6, SavedReload.ini, settings, Warp|Y, %A_Space%
+IniRead, SaveReload7, SavedReload.ini, settings, StorageCoordenate|X, %A_Space%
+IniRead, SaveReload8, SavedReload.ini, settings, StorageCoordenate|Y, %A_Space%
+IniRead, SaveReload9, SavedReload.ini, settings, InventoryCoordenate|X, %A_Space%
+IniRead, SaveReload10, SavedReload.ini, settings, InventoryCoordenate|Y, %A_Space%
+IniRead, SaveReload11, SavedReload.ini, settings, AutoAtack|ON/Off, %A_Space%
+IniRead, SaveReload12, SavedReload.ini, settings, DoubleStrafing|ON/OFF, %A_Space%
+IniRead, SaveReload13, SavedReload.ini, settings, AttentionConcentration|ON/OFF, %A_Space%
+IniRead, SaveReload14, SavedReload.ini, settings, TrueSight|ON/OFF, %A_Space%
+IniRead, SaveReload15, SavedReload.ini, settings, WindWalk|ON/OFF, %A_Space%
+IniRead, SaveReload16, SavedReload.ini, settings, FlyWing/Teleport|ON/OFF, %A_Space%
+IniRead, SaveReload17, SavedReload.ini, settings, AspdPotion|ON/OFF, %A_Space%
+IniRead, SaveReload18, SavedReload.ini, settings, Healer|ON/OFF, %A_Space%
+IniRead, SaveReload19, SavedReload.ini, settings, Teleporter|ON/OFF, %A_Space%
+IniRead, SaveReload20, SavedReload.ini, settings, Warp|ON/OFF, %A_Space%
+IniRead, SaveReload21, SavedReload.ini, settings, Storage|ON/OFF, %A_Space%
+IniRead, SaveReload22, SavedReload.ini, settings, Vip|ON/OFF, %A_Space%
+IniRead, SaveReload23, SavedReload.ini, settings, @Storage, %A_Space%
+IniRead, SaveReload24, SavedReload.ini, settings, @Go, %A_Space%
+IniRead, SaveReload25, SavedReload.ini, settings, @Refresh, %A_Space%
+IniRead, SaveReload26, SavedReload.ini, settings, DoubleStrafing, %A_Space%
+IniRead, SaveReload27, SavedReload.ini, settings, AttentionConcentration, %A_Space%
+IniRead, SaveReload28, SavedReload.ini, settings, TrueSight, %A_Space%
+IniRead, SaveReload29, SavedReload.ini, settings, WindWalk, %A_Space%
+IniRead, SaveReload30, SavedReload.ini, settings, FlyWing/Teleport, %A_Space%
+IniRead, SaveReload31, SavedReload.ini, settings, AspdPotion, %A_Space%
+IniRead, SaveReload32, SavedReload.ini, settings, Vip, %A_Space%
+GuiControl,, Coord1, %SaveReload1%
+GuiControl,, Coord6, %SaveReload2%
+GuiControl,, Coord2, %SaveReload3%
+GuiControl,, Coord7, %SaveReload4%
+GuiControl,, Coord3, %SaveReload5%
+GuiControl,, Coord8, %SaveReload6%
+GuiControl,, Coord4, %SaveReload7%
+GuiControl,, Coord9, %SaveReload8%
+GuiControl,, Coord5, %SaveReload9%
+GuiControl,, Coord10, %SaveReload10%
+GuiControl,, Use, %SaveReload11%
+GuiControl,, Use1, %SaveReload12%
+GuiControl,, Use2, %SaveReload13%
+GuiControl,, Use3, %SaveReload14%
+GuiControl,, Use4, %SaveReload15%
+GuiControl,, Use5, %SaveReload16%
+GuiControl,, Use6, %SaveReload17%
+GuiControl,, Use7, %SaveReload18%
+GuiControl,, Use8, %SaveReload19%
+GuiControl,, Use9, %SaveReload20%
+GuiControl,, Use10, %SaveReload21%
+GuiControl,, Use11, %SaveReload22%
+GuiControl, Choose, Alt1, %SaveReload23%
+GuiControl, Choose, Alt2, %SaveReload24%
+GuiControl, Choose, Alt3, %SaveReload25%
+GuiControl, Choose, Skill1, %SaveReload26%
+GuiControl, Choose, Skill2, %SaveReload27%
+GuiControl, Choose, Skill3, %SaveReload28%
+GuiControl, Choose, Skill4, %SaveReload29%
+GuiControl, Choose, Skill5, %SaveReload30%
+GuiControl, Choose, Skill6, %SaveReload31%
+GuiControl, Choose, Skill7, %SaveReload32%
+Gui, Submit, Nohide
+if Use1 = 1
+	GuiControl, Enable, Skill1
+if Use2 = 1
+	GuiControl, Enable, Skill2
+if Use3 = 1
+	GuiControl, Enable, Skill3
+if Use4 = 1
+	GuiControl, Enable, Skill4
+if Use5 = 1
+	GuiControl, Enable, Skill5
+if Use6 = 1
+	GuiControl, Enable, Skill6
+if Use11 = 1
+	GuiControl, Enable, Skill7
+if Use7 = 1
+{
+	GuiControl, Enable, Coord1
+	GuiControl, Enable, Coord6
+}
+if Use8 = 1
+{
+	GuiControl, Enable, Coord2
+	GuiControl, Enable, Coord7
+}
+if Use9 = 1
+{
+	GuiControl, Enable, Coord3
+	GuiControl, Enable, Coord8
+}
+if Use10 = 1
+{
+	GuiControl, Enable, Coord4
+	GuiControl, Enable, Coord9
+	GuiControl, Enable, Coord5
+	GuiControl, Enable, Coord10
+}
+Gui, Show
+return
+
+k1:
+	Gui, Show
+return
+F10::Pause
+
+
+Use1:
+	Gui, Submit, Nohide
+	if Use1 = 1
+	{
+		GuiControl, Enable, Skill1
+	}
+	else
+		GuiControl, Disable, Skill1
+return
+
+Use2:
+	Gui, Submit, Nohide
+	if Use2 = 1
+	{
+		GuiControl, Enable, Skill2
+	}
+	else
+		GuiControl, Disable, Skill2
+return
+
+Use3:
+	Gui, Submit, Nohide
+	if Use3 = 1
+	{
+		GuiControl, Enable, Skill3
+	}
+	else
+		GuiControl, Disable, Skill3
+return
+
+Use4:
+	Gui, Submit, Nohide
+	if Use4 = 1
+	{
+		GuiControl, Enable, Skill4
+	}
+	else
+		GuiControl, Disable, Skill4
+return
+
+Use5:
+	Gui, Submit, Nohide
+	if Use5 = 1
+	{
+		GuiControl, Enable, Skill5
+	}
+	else
+		GuiControl, Disable, Skill5
+return
+
+Use6:
+	Gui, Submit, Nohide
+	if Use6 = 1
+	{
+		GuiControl, Enable, Skill6
+	}
+	else
+		GuiControl, Disable, Skill6
+return
+
+Use7:
+	Gui, Submit, Nohide
+	if Use7 = 1
+	{
+		GuiControl, Enable, Coord1
+		GuiControl, Enable, Coord6
+	}
+	else
+	{
+		GuiControl, Disable, Coord1
+		GuiControl, Disable, Coord6
+	}
+return
+
+Use8:
+	Gui, Submit, Nohide
+	if Use8 = 1
+	{
+		GuiControl, Enable, Coord2
+		GuiControl, Enable, Coord7
+	}
+	else
+	{
+		GuiControl, Disable, Coord2
+		GuiControl, Disable, Coord7
+	}
+return
+
+Use9:
+	Gui, Submit, Nohide
+	if Use9 = 1
+	{
+		GuiControl, Enable, Coord3
+		GuiControl, Enable, Coord8
+	}
+	else
+	{
+		GuiControl, Disable, Coord3
+		GuiControl, Disable, Coord8
+	}
+return
+
+Use10:
+	Gui, Submit, Nohide
+	if Use10 = 1
+	{
+		GuiControl, Enable, Coord4
+		GuiControl, Enable, Coord9
+		GuiControl, Enable, Coord5
+		GuiControl, Enable, Coord10
+	}
+	else
+	{
+		GuiControl, Disable, Coord4
+		GuiControl, Disable, Coord9
+		GuiControl, Disable, Coord5
+		GuiControl, Disable, Coord10
+	}
+return
+
+Use11:
+	Gui, Submit, Nohide
+	if Use11 = 1
+	{
+	GuiControl, Enable, Skill7
+	}
+	else
+	GuiControl, Disable, Skill7
+return
+
+GuiClose:
+	ButtonExit:
+	IfExist SavedReload.ini
+	{
+		FileDelete SavedReload.ini
+		if ErrorLevel
+		{
+			MsgBox The attempt to overwrite "SavedReload.ini" failed.
+			return
+		}
+	}
+	GuiControlGet, Coord1
+	GuiControlGet, Coord2
+	GuiControlGet, Coord3
+	GuiControlGet, Coord4
+	GuiControlGet, Coord5
+	GuiControlGet, Coord6
+	GuiControlGet, Coord7
+	GuiControlGet, Coord8
+	GuiControlGet, Coord9
+	GuiControlGet, Coord10
+	GuiControlGet, Use
+	GuiControlGet, Use1
+	GuiControlGet, Use2
+	GuiControlGet, Use3
+	GuiControlGet, Use4
+	GuiControlGet, Use5
+	GuiControlGet, Use6
+	GuiControlGet, Use7
+	GuiControlGet, Use8
+	GuiControlGet, Use9
+	GuiControlGet, Use10
+	GuiControlGet, Use11
+	GuiControlGet, Alt1
+	GuiControlGet, Alt2
+	GuiControlGet, Alt3
+	GuiControlGet, Skill1
+	GuiControlGet, Skill2
+	GuiControlGet, Skill3
+	GuiControlGet, Skill4
+	GuiControlGet, Skill5
+	GuiControlGet, Skill6
+	GuiControlGet, Skill7
+	IniWrite, %Coord1%, SavedReload.ini, Settings, HealerCoordenate|X
+	IniWrite, %Coord6%, SavedReload.ini, Settings, HealerCoordenate|Y
+	IniWrite, %Coord2%, SavedReload.ini, Settings, TeleporterCoordenate|X
+	IniWrite, %Coord7%, SavedReload.ini, Settings, TeleporterCoordenate|Y
+	IniWrite, %Coord3%, SavedReload.ini, Settings, Warp|X
+	IniWrite, %Coord8%, SavedReload.ini, Settings, Warp|Y
+	IniWrite, %Coord4%, SavedReload.ini, Settings, StorageCoordenate|X
+	IniWrite, %Coord9%, SavedReload.ini, Settings, StorageCoordenate|Y
+	IniWrite, %Coord5%, SavedReload.ini, Settings, InventoryCoordenate|X
+	IniWrite, %Coord10%, SavedReload.ini, Settings, InventoryCoordenate|Y
+	IniWrite, %Use%, SavedReload.ini, Settings, AutoAtack|ON/Off
+	IniWrite, %Use1%, SavedReload.ini, Settings, DoubleStrafing|ON/OFF
+	IniWrite, %Use2%, SavedReload.ini, Settings, AttentionConcentration|ON/OFF
+	IniWrite, %Use3%, SavedReload.ini, Settings, TrueSight|ON/OFF
+	IniWrite, %Use4%, SavedReload.ini, Settings, WindWalk|ON/OFF
+	IniWrite, %Use5%, SavedReload.ini, Settings, FlyWing/Teleport|ON/OFF
+	IniWrite, %Use6%, SavedReload.ini, Settings, AspdPotion|ON/OFF
+	IniWrite, %Use7%, SavedReload.ini, Settings, Healer|ON/OFF
+	IniWrite, %Use8%, SavedReload.ini, Settings, Teleporter|ON/OFF
+	IniWrite, %Use9%, SavedReload.ini, Settings, Warp|ON/OFF
+	IniWrite, %Use10%, SavedReload.ini, Settings, Storage|ON/OFF
+	IniWrite, %Use11%, SavedReload.ini, Settings, Vip|ON/OFF
+	IniWrite, %Alt1%, SavedReload.ini, Settings, @Storage
+	IniWrite, %Alt2%, SavedReload.ini, Settings, @Go
+	IniWrite, %Alt3%, SavedReload.ini, Settings, @Refresh
+	IniWrite, %Skill1%, SavedReload.ini, Settings, DoubleStrafing
+	IniWrite, %Skill2%, SavedReload.ini, Settings, AttentionConcentration
+	IniWrite, %Skill3%, SavedReload.ini, Settings, TrueSight
+	IniWrite, %Skill4%, SavedReload.ini, Settings, WindWalk
+	IniWrite, %Skill5%, SavedReload.ini, Settings, FlyWing/Teleport
+	IniWrite, %Skill6%, SavedReload.ini, Settings, AspdPotion
+	IniWrite, %Skill7%, SavedReload.ini, Settings, Vip
+	ExitApp
+return
+
+Reload:
+	IfExist SavedReload.ini
+	{
+		FileDelete SavedReload.ini
+		if ErrorLevel
+		{
+			MsgBox The attempt to overwrite "SavedReload.ini" failed.
+			return
+		}
+	}
+	GuiControlGet, Coord1
+	GuiControlGet, Coord2
+	GuiControlGet, Coord3
+	GuiControlGet, Coord4
+	GuiControlGet, Coord5
+	GuiControlGet, Coord6
+	GuiControlGet, Coord7
+	GuiControlGet, Coord8
+	GuiControlGet, Coord9
+	GuiControlGet, Coord10
+	GuiControlGet, Use
+	GuiControlGet, Use1
+	GuiControlGet, Use2
+	GuiControlGet, Use3
+	GuiControlGet, Use4
+	GuiControlGet, Use5
+	GuiControlGet, Use6
+	GuiControlGet, Use7
+	GuiControlGet, Use8
+	GuiControlGet, Use9
+	GuiControlGet, Use10
+	GuiControlGet, Use11
+	GuiControlGet, Alt1
+	GuiControlGet, Alt2
+	GuiControlGet, Alt3
+	GuiControlGet, Skill1
+	GuiControlGet, Skill2
+	GuiControlGet, Skill3
+	GuiControlGet, Skill4
+	GuiControlGet, Skill5
+	GuiControlGet, Skill6
+	GuiControlGet, Skill7
+	IniWrite, %Coord1%, SavedReload.ini, Settings, HealerCoordenate|X
+	IniWrite, %Coord6%, SavedReload.ini, Settings, HealerCoordenate|Y
+	IniWrite, %Coord2%, SavedReload.ini, Settings, TeleporterCoordenate|X
+	IniWrite, %Coord7%, SavedReload.ini, Settings, TeleporterCoordenate|Y
+	IniWrite, %Coord3%, SavedReload.ini, Settings, Warp|X
+	IniWrite, %Coord8%, SavedReload.ini, Settings, Warp|Y
+	IniWrite, %Coord4%, SavedReload.ini, Settings, StorageCoordenate|X
+	IniWrite, %Coord9%, SavedReload.ini, Settings, StorageCoordenate|Y
+	IniWrite, %Coord5%, SavedReload.ini, Settings, InventoryCoordenate|X
+	IniWrite, %Coord10%, SavedReload.ini, Settings, InventoryCoordenate|Y
+	IniWrite, %Use%, SavedReload.ini, Settings, AutoAtack|ON/Off
+	IniWrite, %Use1%, SavedReload.ini, Settings, DoubleStrafing|ON/OFF
+	IniWrite, %Use2%, SavedReload.ini, Settings, AttentionConcentration|ON/OFF
+	IniWrite, %Use3%, SavedReload.ini, Settings, TrueSight|ON/OFF
+	IniWrite, %Use4%, SavedReload.ini, Settings, WindWalk|ON/OFF
+	IniWrite, %Use5%, SavedReload.ini, Settings, FlyWing/Teleport|ON/OFF
+	IniWrite, %Use6%, SavedReload.ini, Settings, AspdPotion|ON/OFF
+	IniWrite, %Use7%, SavedReload.ini, Settings, Healer|ON/OFF
+	IniWrite, %Use8%, SavedReload.ini, Settings, Teleporter|ON/OFF
+	IniWrite, %Use9%, SavedReload.ini, Settings, Warp|ON/OFF
+	IniWrite, %Use10%, SavedReload.ini, Settings, Storage|ON/OFF
+	IniWrite, %Use11%, SavedReload.ini, Settings, Vip|ON/OFF
+	IniWrite, %Alt1%, SavedReload.ini, Settings, @Storage
+	IniWrite, %Alt2%, SavedReload.ini, Settings, @Go
+	IniWrite, %Alt3%, SavedReload.ini, Settings, @Refresh
+	IniWrite, %Skill1%, SavedReload.ini, Settings, DoubleStrafing
+	IniWrite, %Skill2%, SavedReload.ini, Settings, AttentionConcentration
+	IniWrite, %Skill3%, SavedReload.ini, Settings, TrueSight
+	IniWrite, %Skill4%, SavedReload.ini, Settings, WindWalk
+	IniWrite, %Skill5%, SavedReload.ini, Settings, FlyWing/Teleport
+	IniWrite, %Skill6%, SavedReload.ini, Settings, AspdPotion
+	IniWrite, %Skill7%, SavedReload.ini, Settings, Vip
+	Reload
+return
+
+Clear:
+	GuiControl, Disable, Skill1
+	GuiControl, Disable, Skill2
+	GuiControl, Disable, Skill3
+	GuiControl, Disable, Skill4
+	GuiControl, Disable, Skill5
+	GuiControl, Disable, Skill6
+	GuiControl, Disable, Skill7
+	GuiControl, Disable, Coord1
+	GuiControl, Disable, Coord6
+	GuiControl, Disable, Coord2
+	GuiControl, Disable, Coord7
+	GuiControl, Disable, Coord3
+	GuiControl, Disable, Coord8
+	GuiControl, Disable, Coord4
+	GuiControl, Disable, Coord9
+	GuiControl, Disable, Coord5
+	GuiControl, Disable, Coord10
+	GuiControl,, Use, 0
+	GuiControl,, Use1, 0
+	GuiControl,, Use2, 0
+	GuiControl,, Use3, 0
+	GuiControl,, Use4, 0
+	GuiControl,, Use5, 0
+	GuiControl,, Use6, 0
+	GuiControl,, Use7, 0
+	GuiControl,, Use8, 0
+	GuiControl,, Use9, 0
+	GuiControl,, Use10, 0
+	GuiControl,, Use11, 0
+	GuiControl,, Alt1, |1|2|3|4|5|6|7|8|9|0
+	GuiControl,, Alt2, |1|2|3|4|5|6|7|8|9|0
+	GuiControl,, Alt3, |1|2|3|4|5|6|7|8|9|0
+	GuiControl,, Coord1
+	GuiControl,, Coord2
+	GuiControl,, Coord3
+	GuiControl,, Coord4
+	GuiControl,, Coord5
+	GuiControl,, Coord6
+	GuiControl,, Coord7
+	GuiControl,, Coord8
+	GuiControl,, Coord9
+	GuiControl,, Coord10
+	GuiControl,, Skill1, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+	GuiControl,, Skill2, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+	GuiControl,, Skill3, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+	GuiControl,, Skill4, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+	GuiControl,, Skill5, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+	GuiControl,, Skill6, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+	GuiControl,, Skill7, |F1|F2|F3|F4|F5|F6|F7|F8|F9|'|1|2|3|4|5|6|7|8|9|0|-|=|q|w|e|r|t|y|u|i|o|p|´|[|a|s|d|f|g|h|j|k|l|ç|~|]|z|x|c|v|b|n|m|,|.|;
+return
+
+
+
+
+
+Load:
+	FileSelectFile, LoadCoordenadas,,, Open an File:, Files (*.ini;)
+	if LoadCoordenadas =
+		return
+	Gosub, FileRead
+return
+
+FileRead:
+	IniRead, SaveReload1, %LoadCoordenadas%, settings, HealerCoordenate|X, %A_Space%
+	IniRead, SaveReload2, %LoadCoordenadas%, settings, HealerCoordenate|Y, %A_Space%
+	IniRead, SaveReload3, %LoadCoordenadas%, settings, TeleporterCoordenate|X, %A_Space%
+	IniRead, SaveReload4, %LoadCoordenadas%, settings, TeleporterCoordenate|y, %A_Space%
+	IniRead, SaveReload5, %LoadCoordenadas%, settings, Warp|X, %A_Space%
+	IniRead, SaveReload6, %LoadCoordenadas%, settings, Warp|Y, %A_Space%
+	IniRead, SaveReload7, %LoadCoordenadas%, settings, StorageCoordenate|X, %A_Space%
+	IniRead, SaveReload8, %LoadCoordenadas%, settings, StorageCoordenate|Y, %A_Space%
+	IniRead, SaveReload9, %LoadCoordenadas%, settings, InventoryCoordenate|X, %A_Space%
+	IniRead, SaveReload10, %LoadCoordenadas%, settings, InventoryCoordenate|Y, %A_Space%
+	IniRead, SaveReload11, %LoadCoordenadas%, settings, AutoAtack|ON/Off, %A_Space%
+	IniRead, SaveReload12, %LoadCoordenadas%, settings, DoubleStrafing|ON/OFF, %A_Space%
+	IniRead, SaveReload13, %LoadCoordenadas%, settings, AttentionConcentration|ON/OFF, %A_Space%
+	IniRead, SaveReload14, %LoadCoordenadas%, settings, TrueSight|ON/OFF, %A_Space%
+	IniRead, SaveReload15, %LoadCoordenadas%, settings, WindWalk|ON/OFF, %A_Space%
+	IniRead, SaveReload16, %LoadCoordenadas%, settings, FlyWing/Teleport|ON/OFF, %A_Space%
+	IniRead, SaveReload17, %LoadCoordenadas%, settings, AspdPotion|ON/OFF, %A_Space%
+	IniRead, SaveReload18, %LoadCoordenadas%, settings, Healer|ON/OFF, %A_Space%
+	IniRead, SaveReload19, %LoadCoordenadas%, settings, Teleporter|ON/OFF, %A_Space%
+	IniRead, SaveReload20, %LoadCoordenadas%, settings, Warp|ON/OFF, %A_Space%
+	IniRead, SaveReload21, %LoadCoordenadas%, settings, Storage|ON/OFF, %A_Space%
+	IniRead, SaveReload22, %LoadCoordenadas%, settings, Vip|ON/OFF, %A_Space%
+	IniRead, SaveReload23, %LoadCoordenadas%, settings, @Storage, %A_Space%
+	IniRead, SaveReload24, %LoadCoordenadas%, settings, @Go, %A_Space%
+	IniRead, SaveReload25, %LoadCoordenadas%, settings, @Refresh, %A_Space%
+	IniRead, SaveReload26, %LoadCoordenadas%, settings, DoubleStrafing, %A_Space%
+	IniRead, SaveReload27, %LoadCoordenadas%, settings, AttentionConcentration, %A_Space%
+	IniRead, SaveReload28, %LoadCoordenadas%, settings, TrueSight, %A_Space%
+	IniRead, SaveReload29, %LoadCoordenadas%, settings, WindWalk, %A_Space%
+	IniRead, SaveReload30, %LoadCoordenadas%, settings, FlyWing/Teleport, %A_Space%
+	IniRead, SaveReload31, %LoadCoordenadas%, settings, AspdPotion, %A_Space%
+	IniRead, SaveReload32, %LoadCoordenadas%, settings, Vip, %A_Space%
+	GuiControl,, Coord1, %SaveReload1%
+	GuiControl,, Coord6, %SaveReload2%
+	GuiControl,, Coord2, %SaveReload3%
+	GuiControl,, Coord7, %SaveReload4%
+	GuiControl,, Coord3, %SaveReload5%
+	GuiControl,, Coord8, %SaveReload6%
+	GuiControl,, Coord4, %SaveReload7%
+	GuiControl,, Coord9, %SaveReload8%
+	GuiControl,, Coord5, %SaveReload9%
+	GuiControl,, Coord10, %SaveReload10%
+	GuiControl,, Use, %SaveReload11%
+	GuiControl,, Use1, %SaveReload12%
+	GuiControl,, Use2, %SaveReload13%
+	GuiControl,, Use3, %SaveReload14%
+	GuiControl,, Use4, %SaveReload15%
+	GuiControl,, Use5, %SaveReload16%
+	GuiControl,, Use6, %SaveReload17%
+	GuiControl,, Use7, %SaveReload18%
+	GuiControl,, Use8, %SaveReload19%
+	GuiControl,, Use9, %SaveReload20%
+	GuiControl,, Use10, %SaveReload21%
+	GuiControl,, Use11, %SaveReload22%
+	GuiControl, Choose, Alt1, %SaveReload23%
+	GuiControl, Choose, Alt2, %SaveReload24%
+	GuiControl, Choose, Alt3, %SaveReload25%
+	GuiControl, Choose, Skill1, %SaveReload26%
+	GuiControl, Choose, Skill2, %SaveReload27%
+	GuiControl, Choose, Skill3, %SaveReload28%
+	GuiControl, Choose, Skill4, %SaveReload29%
+	GuiControl, Choose, Skill5, %SaveReload30%
+	GuiControl, Choose, Skill6, %SaveReload31%
+	GuiControl, Choose, Skill7, %SaveReload32%
+	Gui, Submit, NoHide
+	if Use1 = 1
+	GuiControl, Enable, Skill1
+	if Use2 = 1
+	GuiControl, Enable, Skill2
+	if Use3 = 1
+	GuiControl, Enable, Skill3
+	if Use4 = 1
+	GuiControl, Enable, Skill4
+	if Use5 = 1
+	GuiControl, Enable, Skill5
+	if Use6 = 1
+	GuiControl, Enable, Skill6
+	if Use7 = 1
+	{
+	GuiControl, Enable, Coord1
+	GuiControl, Enable, Coord6
+	}
+	if Use8 = 1
+	{
+	GuiControl, Enable, Coord2
+	GuiControl, Enable, Coord7
+	}
+	if Use9 = 1
+	{
+	GuiControl, Enable, Coord3
+	GuiControl, Enable, Coord8
+	}
+	if Use10 = 1
+	{
+	GuiControl, Enable, Coord4
+	GuiControl, Enable, Coord9
+	GuiControl, Enable, Coord5
+	GuiControl, Enable, Coord10
+	}
+	if Use11 = 1
+	GuiControl, Enable, Skill7
+	Gui, Show,,
+return
+
+
+
+
+
+Save:
+	FileSelectFile, SaveCoordenadas, S,, Save an File, Files (*.ini;)
+	if SaveCoordenadas =
+		return
+	CurrentFileName = %SaveCoordenadas%.ini
+	Gosub, SaveCoordenadas1
+return
+
+SaveCoordenadas1:
+	IfExist %CurrentFileName%.ini
+	{
+		FileDelete %CurrentFileName%.ini
+		if ErrorLevel
+		{
+			MsgBox The attempt to overwrite "%CurrentFileName%.ini" failed.
+			return
+		}
+	}
+	GuiControlGet, Coord1
+	GuiControlGet, Coord2
+	GuiControlGet, Coord3
+	GuiControlGet, Coord4
+	GuiControlGet, Coord5
+	GuiControlGet, Coord6
+	GuiControlGet, Coord7
+	GuiControlGet, Coord8
+	GuiControlGet, Coord9
+	GuiControlGet, Coord10
+	GuiControlGet, Use
+	GuiControlGet, Use1
+	GuiControlGet, Use2
+	GuiControlGet, Use3
+	GuiControlGet, Use4
+	GuiControlGet, Use5
+	GuiControlGet, Use6
+	GuiControlGet, Use7
+	GuiControlGet, Use8
+	GuiControlGet, Use9
+	GuiControlGet, Use10
+	GuiControlGet, Use11
+	GuiControlGet, Alt1
+	GuiControlGet, Alt2
+	GuiControlGet, Alt3
+	GuiControlGet, Skill1
+	GuiControlGet, Skill2
+	GuiControlGet, Skill3
+	GuiControlGet, Skill4
+	GuiControlGet, Skill5
+	GuiControlGet, Skill6
+	GuiControlGet, Skill7
+	IniWrite, %Coord1%, %SaveCoordenadas%.ini, Settings, HealerCoordenate|X
+	IniWrite, %Coord6%, %SaveCoordenadas%.ini, Settings, HealerCoordenate|Y
+	IniWrite, %Coord2%, %SaveCoordenadas%.ini, Settings, TeleporterCoordenate|X
+	IniWrite, %Coord7%, %SaveCoordenadas%.ini, Settings, TeleporterCoordenate|Y
+	IniWrite, %Coord3%, %SaveCoordenadas%.ini, Settings, Warp|X
+	IniWrite, %Coord8%, %SaveCoordenadas%.ini, Settings, Warp|X
+	IniWrite, %Coord4%, %SaveCoordenadas%.ini, Settings, StorageCoordenate|Y
+	IniWrite, %Coord9%, %SaveCoordenadas%.ini, Settings, StorageCoordenate|X
+	IniWrite, %Coord5%, %SaveCoordenadas%.ini, Settings, InventoryCoordenate|X
+	IniWrite, %Coord10%, %SaveCoordenadas%.ini, Settings, InventoryCoordenate|Y
+	IniWrite, %Use%, %SaveCoordenadas%.ini, Settings, AutoAtack|ON/Off
+	IniWrite, %Use1%, %SaveCoordenadas%.ini, Settings, DoubleStrafing|ON/OFF
+	IniWrite, %Use2%, %SaveCoordenadas%.ini, Settings, AttentionConcentration|ON/OFF
+	IniWrite, %Use3%, %SaveCoordenadas%.ini, Settings, TrueSight|ON/OFF
+	IniWrite, %Use4%, %SaveCoordenadas%.ini, Settings, WindWalk|ON/OFF
+	IniWrite, %Use5%, %SaveCoordenadas%.ini, Settings, FlyWing/Teleport|ON/OFF
+	IniWrite, %Use6%, %SaveCoordenadas%.ini, Settings, AspdPotion|ON/OFF
+	IniWrite, %Use7%, %SaveCoordenadas%.ini, Settings, Healer|ON/OFF
+	IniWrite, %Use8%, %SaveCoordenadas%.ini, Settings, Teleporter|ON/OFF
+	IniWrite, %Use9%, %SaveCoordenadas%.ini, Settings, Warp|ON/OFF
+	IniWrite, %Use10%, %SaveCoordenadas%.ini, Settings, Storage|ON/OFF
+	IniWrite, %Use11%, %SaveCoordenadas%.ini, Settings, Vip|ON/OFF
+	IniWrite, %Alt1%, %SaveCoordenadas%.ini, Settings, @Storage
+	IniWrite, %Alt2%, %SaveCoordenadas%.ini, Settings, @Go
+	IniWrite, %Alt3%, %SaveCoordenadas%.ini, Settings, @Refresh
+	IniWrite, %Skill1%, %SaveCoordenadas%.ini, Settings, DoubleStrafing
+	IniWrite, %Skill2%, %SaveCoordenadas%.ini, Settings, AttentionConcentration
+	IniWrite, %Skill3%, %SaveCoordenadas%.ini, Settings, TrueSight
+	IniWrite, %Skill4%, %SaveCoordenadas%.ini, Settings, WindWalk
+	IniWrite, %Skill5%, %SaveCoordenadas%.ini, Settings, FlyWing/Teleport
+	IniWrite, %Skill6%, %SaveCoordenadas%.ini, Settings, AspdPotion
+	IniWrite, %Skill7%, %SaveCoordenadas%.ini, Settings, Vip
+	Gui, Show,,
+return
+
+
+
+
+
+RoWindow:
+	Gui, 2: Default
+	gui, 2: +owner1 +OwnDialogs +List
+	Gui, 2: Add, ListView, x6 y7  h250 w200 +0x4 gMyListView, Process|ID
+	Gui, 2: Show,, Process List
+
+
+	WinGet, list, List
+	loop, %list%
+	{
+			wid := list%A_Index%
+			WinGet, id, PID, ahk_id %wid%
+					WinGet, process, ProcessName, ahk_id %wid%
+					LV_Add("", Process, ID)
+					LV_ModifyCol(1, 120)
+			LV_ModifyCol(2, "AutoHdr Integer Left")
+
+	}
+return
+
+MyListView:
+	if A_GuiEvent = DoubleClick
+		LV_GetText(FileName, A_EventInfo, 2)
+		WinGetTitle, Name, ahk_pid %FileName%
+		If Name =
+			return
+		Gui, 1: Default
+		GuiControl, Text, RoWindowName, %Name%
+		Gui, 2: Hide
+return
+
+2GuiEscape:
+2GuiClose:
+	Gui, 2: Destroy
+return
+
+ButtonGetCoord:
+	Gui, 3: Destroy
+	Gui, 3: Default
+	Gui, 3: +owner1 +LabelMyGui  +LastFoundExist
+	Gui, 3: Font, S12 , Arial Bold
+	Gui, 3: Add, Text, x26 y47 w200 h20 , Choose for coordenates:
+	Gui, 3: Add, GroupBox, x16 y7 w240 h190 +Center, Alt + X for Coordenates
+	Gui, 3: Font, S8
+	Gui, 3: Add, Radio, x56 y77 w80 h20  vRatio1 Checked, Healer
+	Gui, 3: Add, Radio, x56 y107 w80 h20 vRatio2, Teleport
+	Gui, 3: Add, Radio, x56 y137 w80 h20 vRatio3, Warp
+	Gui, 3: Add, Radio, x156 y77 w80 h20 vRatio4, Storage
+	Gui, 3: Add, Radio, x156 y107 w80 h20 vRatio5, Inventory
+	Gui, 3: Add, Button, x106 y167 w60 h20 gDone, Done
+	Gui, 3: Show,, GetCoord
+return
+
+
+Done:
+	Gui, 3: Submit, Nohide
+	Gui, 3: Cancel
+return
+
+#IfWinExist GetCoord
+	!x::
+	Gui, 3: Submit, Nohide
+	MouseGetPos, PosX, PosY
+	if Ratio1 = 1
+	{
+		GuiControl,, Coord1, %PosX%
+		GuiControl,, Coord6, %Posy%
+	}
+	else if Ratio2 = 1
+	{
+		GuiControl,, Coord2, %PosX%
+		GuiControl,, Coord7, %Posy%
+	}
+	else if Ratio3 = 1
+	{
+		GuiControl,, Coord3, %PosX%
+		GuiControl,, Coord8, %Posy%
+	}
+	else if Ratio4 = 1
+	{
+		GuiControl,, Coord4, %PosX%
+		GuiControl,, Coord9, %Posy%
+	}
+	else if Ratio5 = 1
+	{
+		GuiControl,, Coord5, %PosX%
+		GuiControl,, Coord10, %Posy%
+	}
+return
+
+LSkll6:
+	Send {%Skll6%}
+return
+
+LSkll2:
+	Send {%Skll2%}
+return
+
+LSkll4:
+	Send {%Skll4%}
+return
+
+StartBot:
+	Gui, Submit, NoHide
+	if  RoWindowName =
+		{
+		MsgBox Select RO window!!!
+		return
+		}
+	Else
+	GuiControl, Disable,Start
+
+	if Use1 = 1
+	{
+		 Skll1 = %Skill1%
+	}
+
+
+	if Use2 = 1
+	{
+		 Skll2 = %Skill2%
+		 SetTimer, LSkll2, 239000
+	}
+
+	if Use3 = 1
+	{
+		 Skll3 = %Skill3%
+	}
+
+	if Use4 = 1
+	{
+		 Skll4 = %Skill4%
+		 SetTimer, LSkll4, 399000
+	}
+
+	if Use5 = 1
+	{
+		 Skll5 = %Skill5%
+	}
+
+	if Use6 = 1
+	{
+		 Skll6 = %Skill6%
+		 SetTimer, LSkll6, 1800000
+	}
+
+	if Use7 = 1
+	{
+		 Cord1 = %Coord1%
+		 Cord6 = %Coord6%
+	}
+
+	if Use8 = 1
+	{
+		 Cord2 = %Coord2%
+		 Cord7 = %Coord7%
+	}
+
+	if Use9 = 1
+	{
+		 Cord3 = %Coord3%
+		 Cord8 = %Coord8%
+	}
+
+	if Use10 = 1
+	{
+		 Cord4 = %Coord4%
+		 Cord9 = %Coord9%
+		 Cord5 = %Coord5%
+		 Cord10 = %Coord10%
+	}
+
+	if Use11 = 1
+	{
+		 Skll7 = %Skill7%
+	}
+
+
+	Aut1 = %Alt1%
+	Aut2 = %Alt2%
+	Aut3 = %Alt3%
+
+
+
+	if Monster =
+	{
+	   Cor := 0xF7CEA5
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Abysmal Knight
+	{
+	   Cor := 0x130C14
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Alice
+	{
+	   Cor := 0x6F565F
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Alligator
+	{
+	   Cor := 0x184231
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Anubis
+	{
+	   Cor := 0x446DB7
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Argiope
+	{
+	   Cor := 0x433892
+	   Var := 4
+	   Gosub Exe
+	}
+	else if Monster = Argos
+	{
+	   Cor := 0x9EAED7
+	   Var := 3
+	   Gosub Exe
+	}
+	else if Monster = Banshee
+	{
+	   Cor := 0x6B394A
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Baphomet Jr.
+	{
+	   Cor := 0xD5A4B4
+	   Var := 5
+	   Gosub Exe
+	}
+	else if Monster = Bathory
+	{
+	   Cor := 0x312139
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = BigFoot
+	{
+	   Cor := 0x7068AE
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Clock
+	{
+	   Cor := 0x403654
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Creamy
+	{
+	   Cor := 0x7B7BEF
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Cruiser
+	{
+	   Cor := 0x3043BE
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Dragon Tail
+	{
+	   Cor := 0xA4AAC5
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Drainliar
+	{
+	   Cor := 0x351F74
+	   Var := 2
+	   Gosub Exe
+	}
+	else if Monster = Drops
+	{
+	   Cor := 0x84ADE7
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Dryad
+	{
+	   Cor := 0xC6C6FF
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Dustiness
+	{
+	   Cor := 0x85536C
+	   Var := 6
+	   Gosub Exe
+	}
+	else if Monster = Enchanted Peach Tree
+	{
+	   Cor := 0x7394DE
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Explosion
+	{
+	   Cor := 0x454693
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Evil Cloud Hermit
+	{
+	   Cor := 0x3C324E
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Evil Druid
+	{
+	   Cor := 0x392139
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Fabre
+	{
+	   Cor := 0xB0EFCE
+	   Var := 5
+	   Gosub Exe
+	}
+	else if Monster = Frilldora
+	{
+	   Cor := 0x93BC9B
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Gargoyle
+	{
+	   Cor := 0x5A424A
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Green Ferus
+	{
+	   Cor := 0x97C6A5
+	   Var := 5
+	   Gosub Exe
+	}
+	else if Monster = Hidra
+	{
+	   Cor := 0x524A31
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Horn
+	{
+	   Cor := 0x423152
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Iara
+	{
+	   Cor := 0x7B6B73
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Incubus
+	{
+	   Cor := 0xBDF7FF
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Jing Guai
+	{
+	   Cor := 0xABDDFE
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Mantis
+	{
+	   Cor := 0x04250F
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Marc
+	{
+	   Cor := 0xA5A5DE
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Matyr/Marduk
+	{
+	   Cor := 0x3F2E4D
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Medusa
+	{
+	   Cor := 0x51472E
+	   Var := 5
+	   Gosub Exe
+	}
+	else if Monster = Minorous
+	{
+	   Cor := 0x6987C9
+	   Var := 2
+	   Gosub Exe
+	}
+	else if Monster = Myst Case
+	{
+	   Cor := 0x3F3AD1
+	   Var := 2
+	   Gosub Exe
+	}
+	else if Monster = Nightmare
+	{
+	   Cor := 0x8F7F8D
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Noxious
+	{
+	   Cor := 0x8183E0
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Orc Archer
+	{
+	   Cor := 0x7C74B8
+	   Var := 3
+	   Gosub Exe
+	}
+	else if Monster = Pasana
+	{
+	   Cor := 0x7C74B8
+	   Var := 2
+	   Gosub Exe
+	}
+	else if Monster = Peco Peco Egg
+	{
+	   Cor := 0xA5A5DE
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Porcellio
+	{
+	   Cor := 0x332B75
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Raydric/Alice
+	{
+	   Cor := 0x7B73BD
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Scorpion
+	{
+	   Cor := 0x6CA2F0
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Skeleton Worker
+	{
+	   Cor := 0x513941
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Smokie
+	{
+	   Cor := 0x94A5C6
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Snowier
+	{
+	   Cor := 0x5E4647
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Sohee
+	{
+	   Cor := 0x5A424A
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Sting
+	{
+	   Cor := 0xB5A5D6
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Thara Frog
+	{
+	   Cor := 0x9197CC
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Thief Bug Female
+	{
+	   Cor := 0x5A5A84
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Thief Bug Male
+	{
+	   Cor := 0x5A5A39
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Tri Joint
+	{
+	   Cor := 0x423152
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Verit
+	{
+	   Cor := 0x8C9CCE
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Whisper
+	{
+	   Cor := 0xEFF7FF
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Zerom
+	{
+	   Cor := 0x3A235C
+	   Var := 1
+	   Gosub Exe
+	}
+	else if Monster = Cruiser/Myst Case
+	{
+	   Cor1 := 0x3043BE
+	   Cor2 := 0x3F3AD1
+	   Var1 := 1
+	   Var2 := 2
+	   Goto Exe1
+	}
+	else if Monster = Hidra/Thara
+	{
+	   Cor := 0x7B73BD
+	   Var := 0
+	   Gosub Exe
+	}
+	else if Monster = Thief Bug Female/Male
+	{
+	   Cor1 := 0x5A5A84
+	   Cor2 := 0x5A5A39
+	   Var1 := 0
+	   Var2 := 0
+	   Goto Exe1
+	}
+return
+
+
+
+
+
+
+
+Exe1:
+	WinWaitActive, %RoWindowName%,
+	WinGetPos,,, x,y, %RoWindowName%
+
+	Sleep 2000
+	if Use6 = 1
+	{
+		Send {%Skll6%}
+		Sleep 1000
+	}
+
+	Loop
+	{
+
+		SendInput {ALTDOWN}{%Aut2%}
+		sleep 1000
+		SendInput {ALTDOWN}{%Aut3%}
+		Sleep 1000
+		 if Use10 = 1
+		{
+			SendInput {ALTDOWN}{%Aut1%}
+			Sleep 1000
+			SendInput {ALTDOWN}e
+			Sleep 1000
+			MouseClickDrag, left,  %Cord5%, %Cord10%, %Cord4%, %Cord9%, 25
+			Sleep 1000
+			SendInput {Enter}
+			MouseClickDrag, left,  %Cord5%, %Cord10%, %Cord4%, %Cord9%, 25
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 500
+			SendInput {Esc}
+			Sleep 500
+			SendInput {Esc}
+			Sleep 500
+			SendInput {ALTDOWN}{%Aut2%}
+			Sleep 1000
+		}
+
+
+		Loop 10
+		{
+
+			SendInput {ALTDOWN}{%Aut2%}
+			Sleep 1000
+			SendInput {ALTDOWN}{%Aut3%}
+			Sleep 2000
+			 if Use11 = 1
+			 {
+				  SendInput {%Skll7%}
+				  Sleep 2000
+			 }
+			MouseClick, left, %Cord1%, %Cord6%, 3, 0
+			MouseClick, left, %Cord1%, %Cord6%, 3, 0
+			if Use11 = 1
+			{
+				SendInput {%Skll7%}
+				Sleep 2000
+			}
+			if Use2 = 1
+			{
+				SendInput {%Skll2%}
+				Sleep 1000
+			}
+			if Use3 = 1
+			{
+				SendInput {%Skll3%}
+				sleep 1000
+			}
+			if Use4 = 1
+			{
+				SendInput {%Skll4%}
+				Sleep 2000
+			}
+			MouseClick, left, %Cord1%, %Cord6%, 3
+			MouseClick, left, %Cord1%, %Cord6%, 3
+			Sleep 1500
+			MouseClick, left, %Cord2%, %Cord7%
+			MouseClick, left, %Cord2%, %Cord7%
+			Sleep 1500
+			SendInput {Enter}
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 500
+
+
+			if Use9 = 1
+			{
+			   Sleep 1000
+			   SendInput {F11}
+			   Sleep 500
+			   Loop 5
+			   {
+				  MouseClick, left,  %Coord3%,  %Coord8%,, 0
+				  Sleep, 100
+			   }
+			   Sleep 1000
+			}
+
+			Sleep 700
+			SendInput {F11}
+			Sleep 100
+			SendInput {F11}
+			Sleep 100
+			SendInput {F11}
+			Sleep 100
+
+
+
+			Loop %TimeOnMap%
+			{
+				WinWaitActive, %RoWindowName%,
+				SendInput {%Skll5%}
+				Sleep 100
+
+
+				Loop 5
+				{
+					SendInput {%Skll5%}
+					Sleep 700
+					Send {F11}
+					Sleep 100
+					SendInput {F11}
+					Sleep 100
+					SendInput {F11}
+					Sleep 100
+					CoordMode, Pixel, Relative
+					CoordMode, Mouse, Relative
+					Loop %TimeOnDS%
+					{
+						PixelSearch, OutputVarX, OutputVarY, 0, 0, %x%, %y%, %Cor1%, %Var1%, Fast
+						if ErrorLevel = 0
+						{
+							if Use = 1
+							{
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+							}
+
+							if Use1 = 1
+							{
+								SendInput {%Skll1%}
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+								Sleep 200
+							}
+						}
+						PixelSearch, OutputVarX, OutputVarY, 0, 0, %x%, %y%, %Cor1%, %Var1%, Fast
+						if ErrorLevel = 0
+						{
+							if Use = 1
+							{
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+							}
+
+							if Use1 = 1
+							{
+								SendInput {%Skll1%}
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+								Sleep 200
+							}
+						}
+						PixelSearch, OutputVarX, OutputVarY, 0, 0, %x%, %y%, %Cor2%, %Var2%, Fast
+						if ErrorLevel = 0
+						{
+							if Use = 1
+							{
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+							}
+
+							if Use1 = 1
+							{
+								SendInput {%Skll1%}
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+								Sleep 200
+							}
+						}
+						PixelSearch, OutputVarX, OutputVarY, 0, 0, %x%, %y%, %Cor2%, %Var2%, Fast
+						if ErrorLevel = 0
+						{
+							if Use = 1
+							{
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+							}
+
+							if Use1 = 1
+							{
+								SendInput {%Skll1%}
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+								Sleep 200
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+return
+
+
+
+
+
+Exe:
+	WinWaitActive, %RoWindowName%,
+	WinGetPos,,, x,y, %RoWindowName%
+
+	Sleep 2000
+	if Use6 = 1
+	{
+		Send {%Skll6%}
+		Sleep 1000
+	}
+
+	Loop
+	{
+		SendInput {ALTDOWN}{%Aut2%}
+		sleep 1000
+		SendInput {ALTDOWN}{%Aut3%}
+		Sleep 1000
+		 if Use10 = 1
+		 {
+			SendInput {ALTDOWN}{%Aut1%}
+			Sleep 1000
+			SendInput {ALTDOWN}e
+			Sleep 1000
+			MouseClickDrag, left,  %Cord5%, %Cord10%, %Cord4%, %Cord9%, 25
+			Sleep 1000
+			SendInput {Enter}
+			MouseClickDrag, left,  %Cord5%, %Cord10%, %Cord4%, %Cord9%, 25
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 500
+			SendInput {Esc}
+			Sleep 500
+			SendInput {Esc}
+			Sleep 500
+			SendInput {ALTDOWN}{%Aut2%}
+			Sleep 1000
+		}
+
+
+		Loop 10
+		{
+			SendInput {ALTDOWN}{%Aut2%}
+			Sleep 1000
+			SendInput {ALTDOWN}{%Aut3%}
+			Sleep 2000
+			if Use11 = 1
+			{
+				SendInput {%Skll7%}
+				Sleep 2000
+			}
+			MouseClick, left, %Cord1%, %Cord6%, 3, 0
+			MouseClick, left, %Cord1%, %Cord6%, 3, 0
+			if Use2 = 1
+			{
+				SendInput {%Skll2%}
+				Sleep 1500
+			}
+			if Use3 = 1
+			{
+				SendInput {%Skll3%}
+				sleep 1500
+			}
+			if Use4 = 1
+			{
+				SendInput {%Skll4%}
+				Sleep 2000
+			}
+			MouseClick, left, %Cord1%, %Cord6%, 3, 0
+			MouseClick, left, %Cord1%, %Cord6%, 3, 0
+			Sleep 1500
+			MouseClick, left, %Cord2%, %Cord7%,, 0
+			MouseClick, left, %Cord2%, %Cord7%,, 0
+			Sleep 1500
+			SendInput {Enter}
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 1000
+			SendInput {Enter}
+			Sleep 500
+			if Use9 = 1
+			{
+			   Sleep 1000
+			   SendInput {F11}
+			   Sleep 500
+			   Loop 5
+			   {
+				  MouseClick, left,  %Coord3%,  %Coord8%,, 0
+				  Sleep, 100
+			   }
+			   Sleep 1000
+			}
+
+			Sleep 700
+			SendInput {F11}
+			Sleep 100
+			SendInput {F11}
+			Sleep 100
+			SendInput {F11}
+			Sleep 100
+
+
+
+
+			Loop %TimeOnMap%
+			{
+
+				WinWaitActive, %RoWindowName%,
+				SendInput {%Skll3%}
+				Sleep 100
+
+				Loop 5
+				{
+					SendInput {%Skll5%}
+					Sleep 700
+					SendInput {F11}
+					Sleep 100
+					SendInput {F11}
+					Sleep 100
+					SendInput {F11}
+					Sleep 100
+					CoordMode, Pixel, Relative
+					CoordMode, Mouse, Relative
+					Loop %TimeOnDS%
+					{
+						PixelSearch, OutputVarX, OutputVarY, 0, 0, %x%, %y%, %Cor%, %Var%, Fast
+						if ErrorLevel = 0
+						{
+							if Use = 1
+							{
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+							}
+
+							if Use1 = 1
+							{
+								SendInput {%Skll1%}
+								MouseClick, left, %OutputVarX%, %OutputVarY%,, 0
+								Sleep 200
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+return
